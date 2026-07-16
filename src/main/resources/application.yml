@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: mycode-agent
+  servlet:
+    multipart:
+      location: /home/codemate/temp
+      enabled: true
+      max-file-size: 200MB
+      max-request-size: 2000MB
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY:}
+
+      embedding:
+        options:
+          model: text-embedding-v2
+      chat:
+        options:
+          model: qwen-plus
+      rerank:
+        options:
+          model: qwen3-rerank
+    vectorstore:
+      pgvector:
+        distance-type: cosine_distance # 向量距离计算类型 度量两个向量之间方向差异的相似度算法
+        dimensions: 1536 # 向量维度
+        max-document-batch-size: 10000 # 可选：每批文档的最大数量
+        index-type: hnsw #为向量数据创建的高效索引类型，主要用于加速搜索
+        initialize-schema: true #是否在启动时初始化数据库架构
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/codemate}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+  data:
+    redis:
+      port: ${REDIS_PORT:6379}
+      host: ${REDIS_HOST:localhost}
+      password: ${REDIS_PASSWORD:}
+      database: 2
+      lettuce:
+        pool:
+          max-active: 20 # 连接池最大连接数
+          max-idle: 10 # 连接池中的最大空闲连接
+          min-idle: 5 # 连接池中的最小空闲连接
+          max-wait: 2000ms # 从连接池获取连接的最大等待时间
+
+  threads:
+    virtual:
+      enabled: true # JDK 21 虚拟线程：Tomcat 请求处理 + @Async 自动使用虚拟线程
+
+server:
+  port: 8082
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:/mapper/**.xml
+
+codemate:
+  memory:
+    redis:
+      ttl-seconds: 6000 # Redis 缓存过期时间（秒）
+    agent-max-tokens: 30000 # Agent 上下文 token 预算（超出的旧消息自动生成摘要）
+  workspace:
+    ## 编程智能体的临时工作区的存储位置
+    base-path: /home/codemate/workspace
+
+    cleanup-hours: 24 # 沙箱超过多少小时未修改即自动清理（默认 24）
+  upload:
+    ## 存储用户上传的原始项目代码
+    base-path: /home/codemate/uploaded_projects
+  skills:
+    path: ./skills # Skills 目录，Agent 启动时自动加载所有 .md 文件作为专业技能
+
+search-api:
+  api-key: ${SEARCH_API_KEY:}

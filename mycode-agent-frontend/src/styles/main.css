@@ -1,0 +1,306 @@
+/* ===== CodeMate v2 暗色主题 · 玻璃拟态 ===== */
+:root {
+  /* 背景层级 */
+  --bg-deep: #070c1b;
+  --bg-primary: #0b1121;
+  --bg-surface: #111827;
+  --bg-elevated: #1a2236;
+  --bg-glass: rgba(17, 25, 40, 0.72);
+  --bg-glass-hover: rgba(26, 34, 54, 0.85);
+
+  /* 文字 */
+  --text-primary: #e9edf5;
+  --text-secondary: #8b96b0;
+  --text-muted: #566282;
+
+  /* 边框 */
+  --border-subtle: rgba(56, 75, 114, 0.35);
+  --border-default: rgba(72, 94, 142, 0.45);
+  --border-strong: rgba(99, 124, 178, 0.55);
+
+  /* 主色系 — 青蓝渐变 */
+  --accent: #22d3a0;
+  --accent-hover: #3ce0b2;
+  --accent-soft: rgba(34, 211, 160, 0.12);
+  --accent-glow: rgba(34, 211, 160, 0.25);
+
+  /* 辅助色 */
+  --blue: #3b82f6;
+  --blue-soft: rgba(59, 130, 246, 0.12);
+  --purple: #a78bfa;
+  --purple-soft: rgba(167, 139, 250, 0.12);
+  --amber: #f59e0b;
+  --amber-soft: rgba(245, 158, 11, 0.12);
+  --red: #ef4444;
+  --red-soft: rgba(239, 68, 68, 0.12);
+  --green: #22c55e;
+  --green-soft: rgba(34, 197, 94, 0.12);
+
+  /* 消息气泡 */
+  --user-bubble-bg: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%);
+  --user-bubble-text: #ffffff;
+  --ai-bubble-bg: rgba(30, 41, 59, 0.7);
+  --ai-bubble-border: rgba(56, 75, 114, 0.35);
+
+  /* 圆角 */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 20px var(--accent-glow);
+
+  /* 布局 */
+  --sidebar-w: 280px;
+  --trace-w: 320px;
+  --header-h: 56px;
+
+  /* 兼容旧变量名 */
+  --color-bg: var(--bg-primary);
+  --color-panel: var(--bg-surface);
+  --color-border: var(--border-subtle);
+  --color-border-strong: var(--border-default);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--text-secondary);
+  --color-primary: var(--accent);
+  --color-primary-hover: var(--accent-hover);
+  --color-primary-soft: var(--accent-soft);
+  --color-success: var(--green);
+  --color-danger: var(--red);
+  --color-user-bubble: var(--blue);
+  --color-ai-bubble: var(--ai-bubble-bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 背景网格纹理 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(56, 75, 114, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 75, 114, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+textarea,
+input {
+  font-family: inherit;
+}
+
+/* ===== 通用按钮 ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-default);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
+}
+.btn:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-strong);
+}
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #070c1b;
+  font-weight: 600;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-secondary);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+.btn-danger {
+  color: var(--red);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.btn-danger:hover {
+  background: var(--red-soft);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* ===== 滚动条 ===== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 124, 178, 0.35);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 124, 178, 0.55);
+}
+
+/* ===== 卡片 ===== */
+.card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===== 通用三栏布局 ===== */
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+.layout-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--bg-primary);
+}
+
+/* ===== 动画 ===== */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 28px var(--accent-glow);
+  }
+}
+.cursor-blink::after {
+  content: "▍";
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  color: var(--accent);
+}
+
+/* ===== 移动端适配 ===== */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-w: 100vw;
+    --trace-w: 100vw;
+    --header-h: 48px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+  }
+
+  html,
+  body,
+  #app {
+    font-size: 13px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 移动端三栏布局变单栏 */
+  .layout {
+    flex-direction: column;
+    position: relative;
+  }
+  .layout-center {
+    width: 100%;
+    flex: 1;
+  }
+
+  /* 移动端滚动条更细 */
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  /* 移动端按钮更易点击 */
+  .btn {
+    padding: 8px 16px;
+    font-size: 13px;
+    min-height: 36px;
+  }
+  .btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    min-height: 30px;
+  }
+
+  /* 移动端底部安全区 */
+  .mobile-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
